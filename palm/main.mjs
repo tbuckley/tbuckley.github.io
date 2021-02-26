@@ -42,6 +42,7 @@ function drawTouch(color, width, e) {
 const pointers = {};
 
 test.addEventListener("pointerdown", function(e) {
+  e.preventDefault();
   if(e.pointerType === "touch" || e.pointerType === "pen") {
     pointers[e.pointerId] = e;
     drawTouch("rgba(0,200,100,1)", 3, e);
@@ -73,3 +74,6 @@ test.addEventListener("pointercancel", function(e) {
 });
 
 test.addEventListener("contextmenu", e => e.preventDefault());
+
+// Prevent double-tap handler in Safari :-/
+test.addEventListener("touchstart", e => e.preventDefault());
